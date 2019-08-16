@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="{{ config.language }}" {% if page.dir == "rtl" %}dir="rtl"{% endif %}>
+  {{ partial "head.html" . }}
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
@@ -21,7 +22,50 @@
         {% block head %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div id="all">
+
+        <header>
+
+          {{ partial "nav.html" . }}
+
+        </header>
+
+        {{ partial "breadcrumbs.html" . }}
+
+        <div id="content">
+            {{ if isset .Params "id" }}
+
+              {{ partial .Params.id . }}
+
+            {{ else }}
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div>
+                          {% block body %}{% endblock %}
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+
+            {{ end }}
+        </div>
+        <!-- /#content -->
+
+        {{ partial "footer.html" . }}
+
+    </div>
+    <!-- /#all -->
         {% block javascript %}{% endblock %}
+        {{ partial "scripts.html" . }}
     </body>
 </html>
